@@ -181,80 +181,72 @@
       align-items: center;
       justify-content: center;
       word-break: break-all;
+      position: relative;
     }
     
-    /* Flexible table for better mobile experience */
-    .strength-table {
+    .copy-btn {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: linear-gradient(45deg, #ff0080, #0080ff);
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    .password-output.has-password .copy-btn {
+      opacity: 1;
+      pointer-events: all;
+    }
+    
+    .copy-btn:hover {
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 5px 15px rgba(255, 0, 128, 0.4);
+    }
+    
+    .copy-feedback {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(45deg, #00ff88, #0080ff);
+      color: white;
+      padding: 15px 25px;
+      border-radius: 10px;
+      font-family: 'Orbitron', monospace;
+      font-weight: bold;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    
+    .copy-feedback.show {
+      opacity: 1;
+    }
+    
+    /* Improved responsive table */
+    .table-container {
       width: 100%;
-      border-collapse: collapse;
+      overflow-x: auto;
       margin-top: 20px;
       border-radius: 15px;
-      overflow: hidden;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      display: table;
     }
     
-    @media (max-width: 600px) {
-      .strength-table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-        scrollbar-width: thin;
-        scrollbar-color: #00ff88 transparent;
-      }
-      
-      .strength-table::-webkit-scrollbar {
-        height: 8px;
-      }
-      
-      .strength-table::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.1);
-      }
-      
-      .strength-table::-webkit-scrollbar-thumb {
-        background: #00ff88;
-        border-radius: 4px;
-      }
-      
-      .strength-table thead,
-      .strength-table tbody,
-      .strength-table th,
-      .strength-table td,
-      .strength-table tr {
-        display: block;
-      }
-      
-      .strength-table thead tr {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-      }
-      
-      .strength-table tr {
-        border: 1px solid rgba(0, 255, 136, 0.3);
-        margin-bottom: 10px;
-        border-radius: 8px;
-        padding: 10px;
-        background: rgba(255, 255, 255, 0.05);
-      }
-      
-      .strength-table td {
-        border: none;
-        position: relative;
-        padding: 8px 8px 8px 35%;
-        text-align: left;
-      }
-      
-      .strength-table td:before {
-        content: attr(data-label) ": ";
-        position: absolute;
-        left: 6px;
-        width: 30%;
-        padding-right: 10px;
-        white-space: nowrap;
-        font-weight: bold;
-        color: #00ff88;
-      }
+    .strength-table {
+      width: 100%;
+      min-width: 600px;
+      border-collapse: collapse;
+      border-radius: 15px;
+      overflow: hidden;
     }
     
     .strength-table th {
@@ -265,6 +257,7 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
+      text-align: left;
     }
     
     .strength-table td {
@@ -272,10 +265,87 @@
       background: rgba(255, 255, 255, 0.05);
       border-bottom: 1px solid rgba(0, 255, 136, 0.2);
       transition: background 0.3s ease;
+      vertical-align: middle;
     }
     
     .strength-table tr:hover td {
       background: rgba(0, 255, 136, 0.1);
+    }
+    
+    .strength-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    /* Mobile responsive table */
+    @media (max-width: 768px) {
+      .table-container {
+        border-radius: 10px;
+      }
+      
+      .strength-table {
+        min-width: 100%;
+        font-size: 0.85rem;
+      }
+      
+      .strength-table th,
+      .strength-table td {
+        padding: 12px 8px;
+      }
+      
+      .strength-table th {
+        font-size: 0.8rem;
+      }
+      
+      /* Stack table on very small screens */
+      @media (max-width: 600px) {
+        .strength-table,
+        .strength-table thead,
+        .strength-table tbody,
+        .strength-table th,
+        .strength-table td,
+        .strength-table tr {
+          display: block;
+        }
+        
+        .strength-table {
+          min-width: 100%;
+        }
+        
+        .strength-table thead tr {
+          position: absolute;
+          top: -9999px;
+          left: -9999px;
+        }
+        
+        .strength-table tr {
+          border: 1px solid rgba(0, 255, 136, 0.3);
+          margin-bottom: 15px;
+          border-radius: 10px;
+          padding: 15px;
+          background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .strength-table td {
+          border: none;
+          position: relative;
+          padding: 8px 0;
+          text-align: left;
+          padding-left: 40%;
+        }
+        
+        .strength-table td:before {
+          content: attr(data-label);
+          position: absolute;
+          left: 0;
+          width: 35%;
+          padding-right: 10px;
+          white-space: nowrap;
+          font-weight: bold;
+          color: #00ff88;
+          font-family: 'Orbitron', monospace;
+          font-size: 0.9rem;
+        }
+      }
     }
     
     .strength-weak { color: #ff4444; font-weight: bold; }
@@ -283,14 +353,6 @@
     .strength-strong { color: #00ff88; font-weight: bold; }
     
     /* Tips sections */
-    .tips-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      margin-top: 30px;
-    }
-    
-    /* Additional responsive grid adjustments */
     .tips-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -426,15 +488,6 @@
         grid-template-columns: 1fr;
         gap: 20px;
       }
-      
-      .strength-table {
-        font-size: 0.9rem;
-      }
-      
-      .strength-table th,
-      .strength-table td {
-        padding: 12px 8px;
-      }
     }
     
     /* Tablet Portrait (576px - 767px) */
@@ -474,14 +527,14 @@
         min-height: 60px;
       }
       
-      .shield-icon {
-        font-size: 2.5rem;
+      .copy-btn {
+        right: 10px;
+        font-size: 0.8rem;
+        padding: 6px 10px;
       }
       
-      .strength-table th,
-      .strength-table td {
-        padding: 10px 6px;
-        font-size: 0.85rem;
+      .shield-icon {
+        font-size: 2.5rem;
       }
       
       .tips-section h3 {
@@ -536,19 +589,6 @@
         padding: 12px;
         min-height: 50px;
         word-break: break-all;
-      }
-      
-      .strength-table {
-        font-size: 0.8rem;
-      }
-      
-      .strength-table th,
-      .strength-table td {
-        padding: 8px 4px;
-      }
-      
-      .strength-table th {
-        font-size: 0.75rem;
       }
       
       .tips-section h3 {
@@ -609,15 +649,6 @@
         font-size: 2rem;
       }
       
-      .strength-table {
-        font-size: 0.7rem;
-      }
-      
-      .strength-table th,
-      .strength-table td {
-        padding: 6px 3px;
-      }
-      
       .tips-section h3 {
         font-size: 1.1rem;
       }
@@ -644,10 +675,6 @@
       
       .password-output {
         font-size: 0.8rem;
-      }
-      
-      .strength-table {
-        font-size: 0.65rem;
       }
       
       .tip-item {
@@ -750,6 +777,7 @@
       </button>
       <div class="password-output" id="passwordOutput">
         Click the button to generate your secure password
+        <button class="copy-btn" onclick="copyPassword()" id="copyBtn">📋 Copy</button>
       </div>
     </div>
     
@@ -758,32 +786,34 @@
       <h2 style="font-family: 'Orbitron', monospace; color: #00ff88; text-align: center; margin-bottom: 30px; font-size: 2rem;">
         🧠 Password Security Analysis
       </h2>
-      <table class="strength-table">
-        <thead>
-          <tr>
-            <th>Password Example</th>
-            <th>Security Level</th>
-            <th>Analysis</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td data-label="Password">123456</td>
-            <td data-label="Security Level" class="strength-weak">🚨 CRITICAL RISK</td>
-            <td data-label="Analysis">Extremely common, no complexity, easily cracked in seconds</td>
-          </tr>
-          <tr>
-            <td data-label="Password">Arpi2025</td>
-            <td data-label="Security Level" class="strength-medium">⚠️ MODERATE RISK</td>
-            <td data-label="Analysis">Basic complexity but predictable pattern, vulnerable to attacks</td>
-          </tr>
-          <tr>
-            <td data-label="Password">#Tg9$Kl1!Pz</td>
-            <td data-label="Security Level" class="strength-strong">✅ MAXIMUM SECURITY</td>
-            <td data-label="Analysis">Random generation, full complexity, virtually uncrackable</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-container">
+        <table class="strength-table">
+          <thead>
+            <tr>
+              <th>Password Example</th>
+              <th>Security Level</th>
+              <th>Analysis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="Password">123456</td>
+              <td data-label="Security Level" class="strength-weak">🚨 CRITICAL RISK</td>
+              <td data-label="Analysis">Extremely common, no complexity, easily cracked in seconds</td>
+            </tr>
+            <tr>
+              <td data-label="Password">Arpi2025</td>
+              <td data-label="Security Level" class="strength-medium">⚠️ MODERATE RISK</td>
+              <td data-label="Analysis">Basic complexity but predictable pattern, vulnerable to attacks</td>
+            </tr>
+            <tr>
+              <td data-label="Password">#Tg9$Kl1!Pz</td>
+              <td data-label="Security Level" class="strength-strong">✅ MAXIMUM SECURITY</td>
+              <td data-label="Analysis">Random generation, full complexity, virtually uncrackable</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     
     <!-- Security Guidelines -->
@@ -847,6 +877,11 @@
     </div>
   </div>
   
+  <!-- Copy feedback notification -->
+  <div class="copy-feedback" id="copyFeedback">
+    Password Copied! 🎉
+  </div>
+  
   <footer class="cyber-footer">
     <div style="margin-bottom: 20px;">
       <div class="shield-icon">🛡️</div>
@@ -864,6 +899,8 @@
   </footer>
   
   <script>
+    let currentPassword = "";
+    
     // Enhanced password generator with more security
     function generatePassword() {
       const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -888,34 +925,104 @@
       // Shuffle the password to randomize position of guaranteed characters
       password = password.split('').sort(() => Math.random() - 0.5).join('');
       
-      const outputElement = document.getElementById("passwordOutput");
-      outputElement.innerHTML = password;
-      
-      // Add a subtle animation effect
-      outputElement.style.animation = "none";
-      outputElement.offsetHeight; // Trigger reflow
-      outputElement.style.animation = "pulse 0.5s ease-in-out";
-    }
-    
-    // Create animated background particles
-    function createParticles() {
-      const particlesContainer = document.getElementById('particles');
-      const particleCount = 50;
-      
-      for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.top = Math.random() * 100 + '%';
-        particle.style.width = particle.style.height = Math.random() * 4 + 2 + 'px';
-        particle.style.animationDelay = Math.random() * 6 + 's';
-        particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
-        particlesContainer.appendChild(particle);
-      }
-    }
-    
-    // Initialize particles when page loads
-    window.addEventListener('load', createParticles);
-  </script>
+currentPassword = password;
+     const outputElement = document.getElementById("passwordOutput");
+     outputElement.innerHTML = password + '<button class="copy-btn" onclick="copyPassword()" id="copyBtn">📋 Copy</button>';
+     outputElement.classList.add('has-password');
+     
+     // Add a subtle animation effect
+     outputElement.style.animation = "none";
+     outputElement.offsetHeight; // Trigger reflow
+     outputElement.style.animation = "pulse 0.5s ease-in-out";
+   }
+   
+   // Copy password to clipboard
+   function copyPassword() {
+     if (!currentPassword) {
+       showCopyFeedback("No password to copy!", false);
+       return;
+     }
+     
+     // Try modern clipboard API first
+     if (navigator.clipboard && window.isSecureContext) {
+       navigator.clipboard.writeText(currentPassword).then(() => {
+         showCopyFeedback("Password Copied! 🎉", true);
+       }).catch(() => {
+         // Fallback to legacy method
+         fallbackCopyToClipboard(currentPassword);
+       });
+     } else {
+       // Fallback for older browsers
+       fallbackCopyToClipboard(currentPassword);
+     }
+   }
+   
+   // Fallback copy method for older browsers
+   function fallbackCopyToClipboard(text) {
+     const textArea = document.createElement("textarea");
+     textArea.value = text;
+     textArea.style.position = "fixed";
+     textArea.style.left = "-999999px";
+     textArea.style.top = "-999999px";
+     document.body.appendChild(textArea);
+     textArea.focus();
+     textArea.select();
+     
+     try {
+       const successful = document.execCommand('copy');
+       if (successful) {
+         showCopyFeedback("Password Copied! 🎉", true);
+       } else {
+         showCopyFeedback("Copy failed. Please select and copy manually.", false);
+       }
+     } catch (err) {
+       showCopyFeedback("Copy not supported. Please select and copy manually.", false);
+     }
+     
+     document.body.removeChild(textArea);
+   }
+   
+   // Show copy feedback notification
+   function showCopyFeedback(message, success) {
+     const feedback = document.getElementById("copyFeedback");
+     feedback.textContent = message;
+     feedback.style.background = success ? 
+       "linear-gradient(45deg, #00ff88, #0080ff)" : 
+       "linear-gradient(45deg, #ff4444, #ff0080)";
+     feedback.classList.add("show");
+     
+     setTimeout(() => {
+       feedback.classList.remove("show");
+     }, 2000);
+   }
+   
+   // Create animated background particles
+   function createParticles() {
+     const particlesContainer = document.getElementById('particles');
+     const particleCount = 50;
+     
+     for (let i = 0; i < particleCount; i++) {
+       const particle = document.createElement('div');
+       particle.className = 'particle';
+       particle.style.left = Math.random() * 100 + '%';
+       particle.style.top = Math.random() * 100 + '%';
+       particle.style.width = particle.style.height = Math.random() * 4 + 2 + 'px';
+       particle.style.animationDelay = Math.random() * 6 + 's';
+       particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+       particlesContainer.appendChild(particle);
+     }
+   }
+   
+   // Initialize particles when page loads
+   window.addEventListener('load', createParticles);
+   
+   // Add keyboard shortcut for copying (Ctrl+C when password is generated)
+   document.addEventListener('keydown', function(e) {
+     if ((e.ctrlKey || e.metaKey) && e.key === 'c' && currentPassword) {
+       e.preventDefault();
+       copyPassword();
+     }
+   });
+ </script>
 </body>
 </html>
