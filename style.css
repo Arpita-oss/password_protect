@@ -1,0 +1,345 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #e6f3ff, #ffffff);
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.cyber-header {
+    background: linear-gradient(90deg, #2c5282, #2a9d8f);
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cyber-header h1 {
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.cyber-header p {
+    font-size: 1.1rem;
+    color: #f0f0f0;
+}
+
+.marquee-container {
+    background: #2c5282;
+    padding: 5px 0;
+    margin-top: 10px;
+}
+
+.security-marquee {
+    font-size: 1rem;
+    color: #ffffff;
+    white-space: nowrap;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.generator-section h2, .tips-section h2, .list-section h2, .stats-container h2 {
+    font-size: 1.8rem;
+    color: #2c5282;
+    margin-bottom: 15px;
+}
+
+.generate-btn {
+    background: #2a9d8f;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.2rem;
+    color: #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.generate-btn:hover {
+    background: #218c81;
+}
+
+.password-output {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    font-size: 1.3rem;
+    color: #333;
+    text-align: center;
+    position: relative;
+}
+
+.copy-btn {
+    margin-left: 10px;
+    padding: 5px 10px;
+    background: #2c5282;
+    border: none;
+    color: #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.copy-feedback {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #2a9d8f;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 1000;
+}
+
+.copy-feedback.show {
+    opacity: 1;
+}
+
+.table-controls {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.table-btn {
+    background: #2c5282;
+    border: none;
+    padding: 8px 15px;
+    color: #ffffff;
+    border-radius: 5px;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.table-btn:hover {
+    background: #1a4066;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.strength-table, .stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.strength-table th, .stats-table th {
+    background: #2c5282;
+    color: #ffffff;
+    padding: 12px;
+    text-align: left;
+}
+
+.strength-table td, .stats-table td {
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.strength-table tr:nth-child(even), .stats-table tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.strength-table tr:hover, .stats-table tr:hover {
+    background: #f0f0f0;
+}
+
+.strength-weak { color: #e53e3e; }
+.strength-medium { color: #ed8936; }
+.strength-strong { color: #2a9d8f; }
+
+.stats-table caption {
+    font-size: 1.2rem;
+    color: #2c5282;
+    margin-bottom: 10px;
+}
+
+.stats-table tfoot {
+    font-style: italic;
+    color: #777;
+}
+
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.security-tips, .risk-tips {
+    list-style-type: none;
+    padding: 0;
+}
+
+.security-tips li:before {
+    content: "✔ ";
+    color: #2a9d8f;
+}
+
+.risk-tips li:before {
+    content: "✘ ";
+    color: #e53e3e;
+}
+
+.security-tips li, .risk-tips li {
+    padding: 8px 0;
+    color: #333;
+}
+
+.list-section ol {
+    padding-left: 20px;
+}
+
+.list-section li {
+    margin: 10px 0;
+    color: #333;
+}
+
+.list-section code {
+    background: #f0f0f0;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.cyber-footer {
+    background: #2c5282;
+    padding: 20px 0;
+    text-align: center;
+    color: #ffffff;
+    margin-top: 30px;
+}
+
+.shield-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.security-indicator {
+    width: 15px;
+    height: 15px;
+    background: #2a9d8f;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+    margin: 10px auto;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.5; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    .cyber-header h1 {
+        font-size: 2rem;
+    }
+    .generate-btn {
+        width: 100%;
+        margin-top: 10px;
+    }
+    .password-output {
+        font-size: 1.1rem;
+    }
+    .table-controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .tips-grid {
+        grid-template-columns: 1fr;
+    }
+    .strength-table, .stats-table {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .cyber-header h1 {
+        font-size: 1.5rem;
+    }
+    .card {
+        padding: 10px;
+    }
+    .generate-btn {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+    }
+    .password-output {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+    .strength-table, .stats-table {
+        display: block;
+        overflow-x: hidden;
+    }
+    .strength-table thead {
+        display: none;
+    }
+    .strength-table tr {
+        display: block;
+        border: 1px solid #e0e0e0;
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        background: #ffffff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .strength-table td {
+        display: flex;
+        align-items: flex-start;
+        padding: 8px 0;
+        width: 100%;
+        border-bottom: none;
+        word-break: break-word;
+        font-size: 0.85rem;
+    }
+    .strength-table td:before {
+        content: attr(data-label) ": ";
+        font-weight: bold;
+        color: #2c5282;
+        min-width: 100px; /* Reduced from 120px to fit 375px */
+        margin-right: 8px;
+        flex-shrink: 0;
+        text-align: left;
+    }
+    .strength-table td:first-child:before {
+        content: ""; /* Hide label for Password Example column */
+    }
+    .strength-table td:last-child {
+        border-bottom: 0;
+        padding-bottom: 0;
+    }
+    .stats-table {
+        font-size: 0.8rem;
+    }
+    .table-btn {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+}
